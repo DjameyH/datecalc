@@ -40,12 +40,12 @@ int main()
         cout<< "geweldig oud ben jij";
         return 1;
     }
-    if (gjaar > yearc - 10)
+    if (gjaar > yearc - 9)
     {
         cout << "te jong!";
         return 1;
     }
-    if (gjaar < yearc - 100)
+    if (gjaar < yearc - 101)
     {
         cout << "ouder dan honderd en kan nog typen geweldig! maar doei";
         return 1;
@@ -122,7 +122,60 @@ int main()
         }
     }
 
-    int days = (gjaar - yeard) * 365 + ((gjaar - yeard)/4);
+    int jaren;
+    int maanden;
+    if (gmaand > monthc){
+        if (gdag > dayc) // nog niet jarig
+        {
+            jaren = yearc - gjaar -1;
+            maanden = 12- (gmaand - monthc);
+        }
+            else if (gdag <= dayc)
+        {
+            jaren = yearc - gjaar -1;
+            maanden = 12- (gmaand - monthc);
+        }
+    }
+    else if (gmaand < monthc) //al jarig
+    {
+        if (gdag > dayc) // nog niet jarig
+        {
+            jaren = yearc - gjaar;
+            maanden = monthc - (gmaand - 1);
+        }
+        else if (gdag <= dayc)
+        {
+            jaren = yearc - gjaar;
+            maanden = monthc - gmaand;
+        }
+    }
+    else if (gmaand == monthc)
+    {
+        if (gdag > dayc) // nog niet jarig
+        {
+            jaren = yearc - gjaar -1;
+            maanden = 11;
+        }
+        if (gdag <= dayc) // al jarig
+        {
+            jaren = yearc - gjaar;
+            maanden = 0;
+        }
+        if (gdag == dayc)
+        {
+            cout << "Happy birthday!";
+        }
+    }
+    if(jaren > 100 || jaren < 10)
+    {
+        cout << "leeftijd is niet geschikt";
+        return 1;
+    }
+    cout << "dit is hoe oud jij bent ";
+    cout << jaren << " jaren " << maanden << " maanden ";
+    cout << jaren * 12 + maanden << " maanden " <<  endl;
+
+      int days = (gjaar - yeard) * 365 + ((gjaar - yeard)/4);
     int x;
     if (gjaar % 4 == 0)
     {
@@ -182,63 +235,24 @@ int main()
         x = days + gdag + 333;
     }
     int y = x % 7;
-    int p;
-    cout << "enter";
+    char p{};
+    char m{};
+    char d{};
+    char w{};
+    char v{'v'};
+    char z{};
+    cout << y;
+    cout << "type uw geboortedag";
     cin >> p;
-    if(p == y) //hier nog even confused morgen afmaken
+    if(p == v && y == 3)
     {
         cout << "niceee" << endl;
     }
-    else if (p != y)
-    {
-        cout << "fout" << endl;
-        return 1;
-    }
-
-    cout << "dit is hoe oud jij bent ";
-    if (gmaand > monthc){
-        if (gdag > dayc) // nog niet jarig
-        {
-            cout << yearc - gjaar -1 << " jaren " << 12- (gmaand - monthc);
-            cout << " maanden " << 31 - (gdag - dayc) << " dagen " ;
-        }
-            else if (gdag <= dayc)
-        {
-            cout << yearc - gjaar -1 << " jaren " << 12- (gmaand - monthc);
-            cout << " maanden "<< dayc - gdag << " dagen ";
-        }
-    }
-    else if (gmaand < monthc) //al jarig
-    {
-        if (gdag > dayc) // nog niet jarig
-        {
-            cout << yearc - gjaar << " jaren " << monthc - (gmaand - 1);
-            cout << " maanden " << 31 - (gdag - dayc) << " dagen " ;
-        }
-        else if (gdag <= dayc)
-        {
-            cout << yearc - gjaar << " jaren " << monthc - gmaand << " maanden ";
-            cout << dayc - gdag << " dagen ";
-        }
-    }
-    else if (gmaand == monthc)
-    {
-        if (gdag > dayc) // nog niet jarig
-        {
-            cout << yearc - gjaar -1 << " jaren " << " 11 maanden ";
-            cout << 31 - (gdag - dayc) << "dagen " ;
-        }
-        if (gdag <= dayc) // al jarig
-        {
-            cout << yearc - gjaar << " jaren " << " 0 maanden " << dayc - gdag ;
-            cout << " dagen "; //something here is wrong
-        }
-        if (gdag == dayc)
-        {
-            cout << "Happy birthday!";
-        }
-    }
-    cout << endl;
+    //else if (p != y)
+    //{
+      //  cout << "fout" << endl;
+        //return 1;
+    //}
 
     srand (gmaand*gdag*gjaar);
     int a = -40 + (rand () % 160);
